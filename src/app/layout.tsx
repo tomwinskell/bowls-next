@@ -5,7 +5,7 @@ import FullWidthImage from './ui/components/FullWidthImage';
 import Card from './ui/components/Card';
 import Content from './ui/components/Content';
 import Image from 'next/image';
-import Navigation from './ui/components/Navbar';
+import Navigation from './ui/components/layout/Navigation';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
