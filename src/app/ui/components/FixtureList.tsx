@@ -1,4 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from '@/app/ui/components/table';
 
 type Fixture = {
   key: number;
@@ -25,7 +31,7 @@ export function FixtureList() {
   const { status, data, error, isFetching } = useFixtures();
   return (
     <div>
-      <h1>Fixtures</h1>
+      <h2 className="text-2xl font-bold mb-5">Club Contact Information</h2>
       <div>
         {status === 'pending' ? (
           'Loading...'
@@ -33,19 +39,19 @@ export function FixtureList() {
           <span>Error: {error.message}</span>
         ) : (
           <>
-            <table>
-              <tbody>
+            <Table>
+              <TableBody>
                 {data.map((row) => (
-                  <tr key={row.key}>
-                    <td>{row.date}</td>
-                    <td>{row.day}</td>
-                    <td>{row.local}</td>
-                    <td>{row.ha}</td>
-                    <td>{row.misc}</td>
-                  </tr>
+                  <TableRow key={row.key}>
+                    <TableCell>{row.date}</TableCell>
+                    <TableCell>{row.day}</TableCell>
+                    <TableCell>{row.local}</TableCell>
+                    <TableCell>{row.ha}</TableCell>
+                    <TableCell>{row.misc}</TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
             <div>{isFetching ? 'Background Updating...' : ' '}</div>
           </>
         )}
