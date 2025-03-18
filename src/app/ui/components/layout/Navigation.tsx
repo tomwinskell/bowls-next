@@ -38,7 +38,7 @@ export default function Navigation() {
             {pages.map((page) => (
               <li key={page}>
                 <Link
-                  href={`/${page.toLowerCase()}`}
+                  href={page.toLowerCase() === 'home'? '/' :`/${page.toLowerCase()}`}
                   className="text-lg font-['Noto_Sans_Variable'] text-winter hover:text-gray-300 transition-colors"
                   onClick={closeMenuMobile}
                 >

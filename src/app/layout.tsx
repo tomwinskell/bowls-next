@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import FullWidthImage from './ui/components/FullWidthImage';
+import FullWidthImage from './ui/components/layout/FullWidthImage';
 import Card from './ui/components/Card';
-import Content from './ui/components/Content';
+import Content from './ui/components/layout/Content';
 import Image from 'next/image';
 import Navigation from './ui/components/layout/Navigation';
+
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -39,13 +40,13 @@ export default function RootLayout({
     link2: { url: '/contact', text: 'Contact Us' },
   };
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <header>
-          <FullWidthImage>
 
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <header>
+            <FullWidthImage>
               <Image
                 className="rounded-full overflow-hidden max-w-[250px] w-48 md:w-max"
                 src={'/images/logo.jpeg'}
@@ -53,17 +54,18 @@ export default function RootLayout({
                 width="827"
                 height="849"
               />
+            </FullWidthImage>
+            <Navigation />
+          </header>
+          <main className="flex justify-center">
+            <Content>{children}</Content>
+          </main>
+          <footer className="bg-navy flex flex-row justify-center px-3 py-2 text-center text-white">
+            <Card content={cardContent} />
+          </footer>
+        </body>
+      </html>
 
-          </FullWidthImage>
-          <Navigation />
-        </header>
-        <main className="flex justify-center">
-          <Content>{children}</Content>
-        </main>
-        <footer className="bg-navy flex flex-row justify-center px-3 py-2 text-center text-white">
-          <Card content={cardContent} />
-        </footer>
-      </body>
-    </html>
   );
 }
+
