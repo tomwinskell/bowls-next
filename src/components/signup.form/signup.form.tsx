@@ -1,10 +1,11 @@
 'use client';
 
-// import emailjs from '@emailjs/browser';
+import emailjs from '@emailjs/browser';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Form,
   FormControl,
@@ -22,12 +23,38 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
-import { MailOpen } from 'lucide-react';
 import { useState } from 'react';
 import { signupFormSchema } from './signup.form.schema';
 
 export const SignupForm = () => {
   const [sent, setSent] = useState(false);
+
+  const competitions = [
+    {
+      id: 'none',
+      label: 'NO, I do not want to participate in compeitions.',
+    },
+    {
+      id: 'county-evening',
+      label: 'County - evening league',
+    },
+    {
+      id: 'nwtl-evening',
+      label: 'NWTL - evening league',
+    },
+    {
+      id: 'nansa-evening',
+      label: 'NANSA - evening league',
+    },
+    {
+      id: 'nnal-afternoon',
+      label: 'NNAL - afternoon league',
+    },
+    {
+      id: 'nansa-afternoon',
+      label: 'NANSA - afternoon league',
+    },
+  ] as const;
 
   const form = useForm<z.infer<typeof signupFormSchema>>({
     resolver: zodResolver(signupFormSchema),
@@ -37,7 +64,6 @@ export const SignupForm = () => {
         lastName: '',
         phone: '',
         email: '',
-        dateCreated: undefined,
       },
       location: {
         streetNumber: '',
@@ -48,26 +74,25 @@ export const SignupForm = () => {
       membership: {
         type: 'full',
         payment: 'cash',
-        competitions: undefined,
-        agreeToTerms: undefined,
+        competitions: ['none'],
       },
     },
   });
 
   const onSubmit = (values: z.infer<typeof signupFormSchema>) => {
     console.log(values);
-    // emailjs
-    //   .send('service_364ohnh', 'template_e00j55m', values, {
-    //     publicKey: process.env.NEXT_PUBLIC_VITE_EMAIL_JS,
-    //   })
-    //   .then(
-    //     () => {
-    //       console.log('Success');
-    //     },
-    //     (error) => {
-    //       console.log('Failed', error);
-    //     }
-    //   );
+    emailjs
+      .send('service_364ohnh', 'template_e00j55m', values, {
+        publicKey: process.env.NEXT_PUBLIC_VITE_EMAIL_JS,
+      })
+      .then(
+        () => {
+          console.log('Success');
+        },
+        (error) => {
+          console.log('Failed', error);
+        }
+      );
     setSent(true);
   };
 
@@ -93,9 +118,20 @@ export const SignupForm = () => {
   } else {
     return (
       <div>
-        <p className="leading-7 [&:not(:first-child)]:mt-6 mb-5">
+        <p className="leading-7 [&:not(:first-child)]:mt-6">
           Complete the form and pay your membership fee to become a member. One
           form per person.
+        </p>
+        <p className="leading-7 mb-6">
+          <span>You can also </span>
+          <a
+            href="/membership.pdf"
+            target="_blank"
+            className="font-semibold underline"
+          >
+            click this link
+          </a>{' '}
+          <span> to download a paper copy of this form.</span>
         </p>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -276,8 +312,90 @@ export const SignupForm = () => {
                 )}
               />
             </div>
-            <Button type="submit">
-              <MailOpen /> Submit My Application
+            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+              Competitions
+            </h3>
+            <FormField
+              control={form.control}
+              name="membership.competitions"
+              render={() => (
+                <FormItem>
+                  <div className="mb-4">
+                    <FormLabel className="text-base">
+                      Preferences for Competitions
+                    </FormLabel>
+                    <FormDescription>
+                      Participation in League Matches is only available to FULL
+                      members.
+                    </FormDescription>
+                  </div>
+                  {competitions.map((item) => (
+                    <FormField
+                      key={item.id}
+                      control={form.control}
+                      name="membership.competitions"
+                      render={({ field }) => {
+                        return (
+                          <FormItem
+                            key={item.id}
+                            className="flex flex-row items-start space-x-3 space-y-0"
+                          >
+                            <FormControl>
+                              <Checkbox
+                                checked={field.value?.includes(item.id)}
+                                onCheckedChange={(checked) => {
+                                  return checked
+                                    ? field.onChange([...field.value, item.id])
+                                    : field.onChange(
+                                        field.value?.filter(
+                                          (value) => value !== item.id
+                                        )
+                                      );
+                                }}
+                              />
+                            </FormControl>
+                            <FormLabel className="text-sm font-normal">
+                              {item.label}
+                            </FormLabel>
+                          </FormItem>
+                        );
+                      }}
+                    />
+                  ))}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="membership.agreeToTerms"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormDescription>
+                      I agree that my home address, phone number and e-mail
+                      address will be shared with members of Mundesley Haig
+                      Bowls Club. The information will not be passed to any
+                      other persons unless there is a legal requirement or
+                      medical emergency.
+                    </FormDescription>
+                    <FormMessage />
+                  </div>
+                </FormItem>
+              )}
+            />
+
+            <Button
+              type="submit"
+            >
+              Submit My Application
             </Button>
           </form>
         </Form>
