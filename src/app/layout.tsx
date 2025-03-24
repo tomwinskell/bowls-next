@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import FullWidthImage from './ui/components/layout/FullWidthImage';
-import Card from './ui/components/Card';
-import Content from './ui/components/layout/Content';
+import FullWidthImage from '../components/layout/FullWidthImage';
+import Card from '../components/ui/Card';
+import Content from '../components/layout/Content';
 import Image from 'next/image';
-import Navigation from './ui/components/layout/Navigation';
+import Navigation from '../components/layout/Navigation';
 
 
 const geistSans = Geist({

@@ -2,8 +2,11 @@
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient } from '@tanstack/react-query';
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
-import { Persister, PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
-import { FixtureList } from '../ui/components/FixtureList';
+import {
+  Persister,
+  PersistQueryClientProvider,
+} from '@tanstack/react-query-persist-client';
+import { FixtureList } from '../../components/fixtures.list/FixturesList';
 import { useEffect, useState } from 'react';
 
 export default function FixturesPage() {
@@ -31,9 +34,9 @@ export default function FixturesPage() {
   }, []);
 
   if (!persister) {
-    return <div>Loading...</div>;  // Render loading state until persister is ready
+    return <div>Loading...</div>; // Render loading state until persister is ready
   }
-  
+
   return (
     <PersistQueryClientProvider
       client={queryClient}

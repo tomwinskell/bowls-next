@@ -4,7 +4,7 @@ import {
   TableBody,
   TableCell,
   TableRow,
-} from '@/app/ui/components/table';
+} from '@/components/fixtures.list/table';
 
 type Fixture = {
   key: number;

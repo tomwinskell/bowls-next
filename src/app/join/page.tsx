@@ -1,14 +1,14 @@
-import { ContactForm } from '../../components/contact.form/contact.form';
+import { SignupForm } from '@/components/signup.form/signup.form';
 
-export default function ContactPage(): React.JSX.Element {
+export default function SignupPage(): React.JSX.Element {
   return (
     <>
       <div className="mb-5">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          Contact Us
+          Become a Member
         </h2>
       </div>
-      <ContactForm />
+      <SignupForm />
     </>
   );
 }
