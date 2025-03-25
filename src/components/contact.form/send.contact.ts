@@ -5,7 +5,7 @@ import { contactFormSchema } from './contact.form.schema';
 import { ContactEmailTemplate } from './contact.email.template';
 import { ContactReplyTemplate } from './contact.reply.template';
 
-const resend = new Resend(process.env.NEXT_PUBLIC_RESEND);
+const resend = new Resend(process.env.RESEND);
 
 export const sendContactEmail = async (
   values: z.infer<typeof contactFormSchema>
@@ -25,7 +25,7 @@ export const sendContactReply = async (
     from: 'Mundesley Haig Bowls Club <no-reply@mundesleybowlsclub.co.uk>',
     to: values.email,
     replyTo: 'mundesleyhaigbowlsclub@gmail.com',
-    subject: `Thank you for your messagen to Mundesley Haig Bowls Club`,
+    subject: `Thank you for your message to Mundesley Haig Bowls Club`,
     react: ContactReplyTemplate(values) as React.ReactNode,
   });
 };

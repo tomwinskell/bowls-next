@@ -5,7 +5,7 @@ import { signupFormSchema } from './signup.form.schema';
 import { SignupEmailTemplate } from './signup.email.template';
 import { SignupReplyTemplate } from './signup.reply.template';
 
-const resend = new Resend(process.env.NEXT_PUBLIC_RESEND);
+const resend = new Resend(process.env.RESEND);
 
 export const sendSignupEmail = async (
   values: z.infer<typeof signupFormSchema>
