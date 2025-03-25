@@ -1,11 +1,11 @@
 'use client';
 
-import emailjs from '@emailjs/browser';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
+
 import {
   Form,
   FormControl,
@@ -25,6 +25,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { signupFormSchema } from './signup.form.schema';
+import { resend } from './send.email';
 
 export const SignupForm = () => {
   const [sent, setSent] = useState(false);
@@ -80,19 +81,7 @@ export const SignupForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof signupFormSchema>) => {
-    console.log(values);
-    emailjs
-      .send('service_364ohnh', 'template_e00j55m', values, {
-        publicKey: process.env.NEXT_PUBLIC_VITE_EMAIL_JS,
-      })
-      .then(
-        () => {
-          console.log('Success');
-        },
-        (error) => {
-          console.log('Failed', error);
-        }
-      );
+    resend(values);
     setSent(true);
   };
 
@@ -392,11 +381,7 @@ export const SignupForm = () => {
               )}
             />
 
-            <Button
-              type="submit"
-            >
-              Submit My Application
-            </Button>
+            <Button type="submit">Submit My Application</Button>
           </form>
         </Form>
       </div>

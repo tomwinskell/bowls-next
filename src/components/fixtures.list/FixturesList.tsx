@@ -31,7 +31,9 @@ export function FixtureList() {
   const { status, data, error, isFetching } = useFixtures();
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-5">Club Contact Information</h2>
+      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+        Fixtures 2025
+      </h2>
       <div>
         {status === 'pending' ? (
           'Loading...'
