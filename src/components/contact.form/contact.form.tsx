@@ -1,6 +1,5 @@
 'use client';
 
-import emailjs from '@emailjs/browser';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -19,6 +18,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { MailOpen } from 'lucide-react';
 import { useState } from 'react';
+import { sendContactEmail, sendContactReply } from './send.contact';
 
 export const ContactForm = () => {
   const [sent, setSent] = useState(false);
@@ -34,18 +34,8 @@ export const ContactForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof contactFormSchema>) => {
-    emailjs
-      .send('service_364ohnh', 'template_e00j55m', values, {
-        publicKey: process.env.NEXT_PUBLIC_VITE_EMAIL_JS,
-      })
-      .then(
-        () => {
-          console.log('Success');
-        },
-        (error) => {
-          console.log('Failed', error);
-        }
-      );
+    sendContactEmail(values);
+    sendContactReply(values);
     setSent(true);
   };
 
