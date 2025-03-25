@@ -25,7 +25,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { signupFormSchema } from './signup.form.schema';
-import { sendSignupData } from './send.signup';
+import { sendSignupEmail, sendSignupReply } from './send.signup';
 
 export const SignupForm = () => {
   const [sent, setSent] = useState(false);
@@ -81,7 +81,8 @@ export const SignupForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof signupFormSchema>) => {
-    sendSignupData(values);
+    sendSignupEmail(values);
+    sendSignupReply(values);
     setSent(true);
   };
 
