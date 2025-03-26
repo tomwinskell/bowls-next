@@ -3,7 +3,6 @@ import { Resend } from 'resend';
 import { z } from 'zod';
 import { signupFormSchema } from './signup.form.schema';
 import { SignupEmailTemplate } from './signup.email.template';
-import { SignupReplyTemplate } from './signup.reply.template';
 
 const resend = new Resend(process.env.RESEND);
 
@@ -26,6 +25,6 @@ export const sendSignupReply = async (
     to: values.profile.email,
     replyTo: 'mundesleyhaigbowlsclub@gmail.com',
     subject: `Completed membership form for Mundesley Haig Bowls Club`,
-    react: SignupReplyTemplate(values) as React.ReactNode,
+    react: SignupEmailTemplate(values) as React.ReactNode,
   });
 };

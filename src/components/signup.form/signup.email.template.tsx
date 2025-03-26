@@ -14,6 +14,7 @@ export const SignupEmailTemplate: React.FC<
     </p>
     <p>Phone number: {profile.phone}</p>
     <p>Email address: {profile.email}</p>
+    <p>Agrees to terms: {membership.agreeToTerms ? 'YES' : 'NO'}</p>
 
     <h3>Address</h3>
     <p>
@@ -24,11 +25,15 @@ export const SignupEmailTemplate: React.FC<
     <h3>Membership details</h3>
     <p>Membership type: {membership.type.toUpperCase()}</p>
     <p>Will pay by: {membership.payment.toUpperCase()}</p>
-    <ul>
-      {membership.competitions.map((value: string) => (
-        <li key={value}>{value.toUpperCase()}</li>
-      ))}
-    </ul>
-    <p>Agrees to terms: {membership.agreeToTerms ? 'YES' : 'NO'}</p>
+    <h3>Competition preferences</h3>
+    {membership.competitions.length === 0 ? (
+      <p>I do not wish to participate in any competitions.</p>
+    ) : (
+      <ul>
+        {membership.competitions.map((value: string) => (
+          <li key={value}>{value.toUpperCase()}</li>
+        ))}
+      </ul>
+    )}
   </div>
 );

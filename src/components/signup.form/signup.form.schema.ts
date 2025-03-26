@@ -20,15 +20,13 @@ export const signupFormSchema = z.object({
     competitions: z
       .array(
         z.enum([
-          
           'county-evening',
           'nwtl-evening',
           'nansa-evening',
           'nnal-afternoon',
           'nansa-afternoon',
         ])
-      )
-      .min(1, 'You must select at least 1 option from the list.'),
+      ),
     agreeToTerms: z.literal(true, {
       errorMap: () => ({ message: 'You must agree to the terms to submit.' }),
     }),
