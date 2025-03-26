@@ -20,7 +20,7 @@ export const signupFormSchema = z.object({
     competitions: z
       .array(
         z.enum([
-          'none',
+          
           'county-evening',
           'nwtl-evening',
           'nansa-evening',

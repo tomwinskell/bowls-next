@@ -7,7 +7,7 @@ export const SignupReplyTemplate: React.FC<
 > = ({ profile, location, membership }: z.infer<typeof signupFormSchema>) => (
   <div>
     <h2>
-      New membership application from {profile.firstName} {profile.lastName}
+      Membership application from {profile.firstName} {profile.lastName}
     </h2>
     <p>
       Name: {profile.firstName} {profile.lastName}

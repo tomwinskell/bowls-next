@@ -14,7 +14,7 @@ export const sendSignupEmail = async (
     from: 'Mundesley Haig Bowls Club <no-reply@mundesleybowlsclub.co.uk>',
     to: 'mundesleyhaigbowlsclub@gmail.com',
     replyTo: values.profile.email,
-    subject: `New membership application from ${values.profile.firstName} ${values.profile.lastName}`,
+    subject: `Membership application from ${values.profile.firstName} ${values.profile.lastName}`,
     react: SignupEmailTemplate(values) as React.ReactNode,
   });
 };

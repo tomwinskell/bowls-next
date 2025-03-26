@@ -14,7 +14,7 @@ export const sendContactEmail = async (
     from: 'Mundesley Haig Bowls Club <no-reply@mundesleybowlsclub.co.uk>',
     to: 'mundesleyhaigbowlsclub@gmail.com',
     replyTo: values.email,
-    subject: `New message from ${values.name}`,
+    subject: `Message from ${values.name}`,
     react: ContactEmailTemplate(values) as React.ReactNode,
   });
 };

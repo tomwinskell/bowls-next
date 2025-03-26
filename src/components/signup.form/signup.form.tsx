@@ -32,10 +32,6 @@ export const SignupForm = () => {
 
   const competitions = [
     {
-      id: 'none',
-      label: 'NO, I do not want to participate in compeitions.',
-    },
-    {
       id: 'county-evening',
       label: 'County - evening league',
     },
@@ -75,7 +71,7 @@ export const SignupForm = () => {
       membership: {
         type: 'full',
         payment: 'cash',
-        competitions: ['none'],
+        competitions: [],
       },
     },
   });
