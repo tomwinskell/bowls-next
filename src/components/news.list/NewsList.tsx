@@ -35,7 +35,12 @@ function useNews() {
 
 export function NewsList() {
   const { status, data, error, isFetching } = useNews();
-  console.log(data);
+  const firstFiveArticles = data
+    ?.map((article, index) => {
+      if (index >= 5) return null;
+      return article;
+    })
+    .filter((article) => article !== null);
   return (
     <>
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
@@ -48,7 +53,7 @@ export function NewsList() {
           <span>Error: {error.message}</span>
         ) : (
           <div className="flex flex-col gap-4">
-            {data.map((article) => (
+            {firstFiveArticles?.map((article) => (
               <Card
                 key={article.key}
                 className={cn(
@@ -69,6 +74,9 @@ export function NewsList() {
                 )}
                 <CardHeader>
                   <CardTitle>{article.title}</CardTitle>
+                  <div className="font-semibold text-sm italic text-muted-foreground">
+                    {article.date}
+                  </div>
                   <CardDescription>{article.text}</CardDescription>
                 </CardHeader>
                 {article.link && article.linkText && (
