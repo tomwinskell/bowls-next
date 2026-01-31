@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import FullWidthImage from '../components/layout/FullWidthImage';
-import Card from '../components/ui/Card';
+import Card from '../components/ui/footer.card';
 import Content from '../components/layout/Content';
 import Image from 'next/image';
 import Navigation from '../components/layout/Navigation';
-
+import ReactQueryProvider from '@/providers/query.provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -20,7 +20,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Mundesley Haig Bowls Club',
-  description: 'An outdoor only bowls club in Mundesley, North Norfolk. Since 1929.',
+  description:
+    'An outdoor only bowls club in Mundesley, North Norfolk. Since 1929.',
 };
 
 export default function RootLayout({
@@ -40,11 +41,11 @@ export default function RootLayout({
     link2: { url: '/contact', text: 'Contact Us' },
   };
   return (
-
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ReactQueryProvider>
           <header>
             <FullWidthImage>
               <Image
@@ -63,9 +64,8 @@ export default function RootLayout({
           <footer className="bg-navy flex flex-row justify-center px-3 py-2 text-center text-white">
             <Card content={cardContent} />
           </footer>
-        </body>
-      </html>
-
+        </ReactQueryProvider>
+      </body>
+    </html>
   );
 }
-

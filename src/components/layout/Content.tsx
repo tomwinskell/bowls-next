@@ -6,7 +6,7 @@ interface ContentProps {
 
 export default function Content({ children }: ContentProps) {
   return (
-    <div className="max-w-[800px] font-['Noto_Sans_Variable']">
+    <div className="max-w-[800px] font-['Noto_Sans_Variable'] w-full">
       <div className="m-5 p-5 text-justify text-pretty">{children}</div>
     </div>
   );
