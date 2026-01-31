@@ -17,16 +17,7 @@ export const signupFormSchema = z.object({
   membership: z.object({
     type: z.enum(['full', 'social']),
     payment: z.enum(['cash', 'cheque', 'transfer']),
-    competitions: z
-      .array(
-        z.enum([
-          'county-evening',
-          'nwtl-evening',
-          'nansa-evening',
-          'nnal-afternoon',
-          'nansa-afternoon',
-        ])
-      ),
+    competitions: z.array(z.enum(['evening', 'afternoon'])),
     agreeToTerms: z.literal(true, {
       errorMap: () => ({ message: 'You must agree to the terms to submit.' }),
     }),

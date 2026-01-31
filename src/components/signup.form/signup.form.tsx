@@ -32,24 +32,12 @@ export const SignupForm = () => {
 
   const competitions = [
     {
-      id: 'county-evening',
-      label: 'County - evening league',
+      id: 'evening',
+      label: 'Evening',
     },
     {
-      id: 'nwtl-evening',
-      label: 'NWTL - evening league',
-    },
-    {
-      id: 'nansa-evening',
-      label: 'NANSA - evening league',
-    },
-    {
-      id: 'nnal-afternoon',
-      label: 'NNAL - afternoon league',
-    },
-    {
-      id: 'nansa-afternoon',
-      label: 'NANSA - afternoon league',
+      id: 'afternoon',
+      label: 'Afternoon',
     },
   ] as const;
 
@@ -310,9 +298,18 @@ export const SignupForm = () => {
                     <FormLabel className="text-base">
                       Preferences for Competitions
                     </FormLabel>
-                    <FormDescription>
-                      Participation in League Matches is only available to FULL
-                      members.
+                    <FormDescription className="flex flex-col gap-2">
+                      <p>
+                        The club competes in a number of League fixtures during
+                        the season. These are played either in the evening,
+                        COUNTY, NWTL, and NANSA Evening (generally around 6.45pm
+                        to 8.45pm) and afternoon NNAL, and NANSA Afternoon
+                        (generally 2pm to 4pm).
+                      </p>
+                      <p>
+                        Please indicate whether you would like to partake in
+                        either Afternoon, Evening or both Leagues.
+                      </p>
                     </FormDescription>
                   </div>
                   {competitions.map((item) => (
