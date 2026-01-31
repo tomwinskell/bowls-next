@@ -7,6 +7,7 @@ import {
   PersistQueryClientProvider,
 } from '@tanstack/react-query-persist-client';
 import { ReactNode, useEffect, useState } from 'react';
+import { FullPageLoader } from '@/components/Loaders';
 
 export default function ReactQueryProvider({
   children,
@@ -37,7 +38,7 @@ export default function ReactQueryProvider({
   }, []);
 
   if (!persister) {
-    return <div>Loading...</div>; // Render loading state until persister is ready
+    return <FullPageLoader />;
   }
 
   return (

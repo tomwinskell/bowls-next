@@ -1,3 +1,4 @@
+'use client';
 import { useQuery } from '@tanstack/react-query';
 import {
   Table,
@@ -6,6 +7,8 @@ import {
   TableRow,
   TableHeader,
 } from '@/components/fixtures.list/table';
+import { Skeleton } from '../ui/skeleton';
+import { AlertDestructive } from '../AlertDestructive';
 
 type Fixture = {
   key: number;
@@ -32,7 +35,7 @@ function useFixtures() {
 }
 
 export function FixtureList() {
-  const { status, data, error, isFetching } = useFixtures();
+  const { status, data, error } = useFixtures();
   let year = new Date().getFullYear();
   if (data) {
     const y = data[1].date.split('/')[2];
@@ -48,9 +51,9 @@ export function FixtureList() {
       </h2>
       <div>
         {status === 'pending' ? (
-          'Loading...'
+          <Skeleton className="h-[600px] w-full" />
         ) : status === 'error' ? (
-          <span>Error: {error.message}</span>
+          <AlertDestructive message={error.message} />
         ) : (
           <>
             <Table>
@@ -85,7 +88,6 @@ export function FixtureList() {
                 ))}
               </TableBody>
             </Table>
-            <div>{isFetching ? 'Background Updating...' : ' '}</div>
           </>
         )}
       </div>

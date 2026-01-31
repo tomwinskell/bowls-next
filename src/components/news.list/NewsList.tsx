@@ -1,3 +1,4 @@
+'use client';
 import { useQuery } from '@tanstack/react-query';
 import {
   Card,
@@ -10,6 +11,8 @@ import Image from 'next/image';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import { Skeleton } from '../ui/skeleton';
+import { AlertDestructive } from '../AlertDestructive';
 
 type NewsArticle = {
   key: string;
@@ -34,7 +37,7 @@ function useNews() {
 }
 
 export function NewsList() {
-  const { status, data, error, isFetching } = useNews();
+  const { status, data, error } = useNews();
   const firstFiveArticles = data
     ?.map((article, index) => {
       if (index >= 5) return null;
@@ -48,9 +51,9 @@ export function NewsList() {
       </h2>
       <>
         {status === 'pending' ? (
-          'Loading...'
+          <Skeleton className="h-[600px] w-full" />
         ) : status === 'error' ? (
-          <span>Error: {error.message}</span>
+          <AlertDestructive message={error.message} />
         ) : (
           <div className="flex flex-col gap-4">
             {firstFiveArticles?.map((article) => (
@@ -90,7 +93,6 @@ export function NewsList() {
                 )}
               </Card>
             ))}
-            <div>{isFetching ? 'Background Updating...' : ' '}</div>
           </div>
         )}
       </>
