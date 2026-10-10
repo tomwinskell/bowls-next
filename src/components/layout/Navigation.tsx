@@ -1,9 +1,9 @@
-'use client';
-import { useState } from 'react';
-import Link from 'next/link';
-import '@fontsource-variable/noto-sans';
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import "@fontsource-variable/noto-sans";
 
-const pages = ['Home', 'News', 'Join', 'Fixtures', 'Contact'];
+const pages = ["Home", "News", "Join", "Fixtures", "Conduct", "Contact"];
 
 export default function Navigation() {
   const [showMenu, setShowMenu] = useState(false);
@@ -24,7 +24,7 @@ export default function Navigation() {
         {/* Mobile Menu */}
         <div
           className={`fixed top-0 left-0 w-screen h-screen bg-navy flex flex-col items-center justify-center transition-all duration-75 ${
-            showMenu ? 'opacity-100 visible' : 'opacity-0 invisible'
+            showMenu ? "opacity-100 visible" : "opacity-0 invisible"
           } md:hidden`}
         >
           <div
@@ -38,8 +38,8 @@ export default function Navigation() {
               <li key={page}>
                 <Link
                   href={
-                    page.toLowerCase() === 'home'
-                      ? '/'
+                    page.toLowerCase() === "home"
+                      ? "/"
                       : `/${page.toLowerCase()}`
                   }
                   className="text-lg font-['Noto_Sans_Variable'] text-winter hover:text-gray-300 transition-colors"
@@ -58,7 +58,7 @@ export default function Navigation() {
             <li key={page}>
               <Link
                 href={
-                  page.toLowerCase() === 'home' ? '/' : `/${page.toLowerCase()}`
+                  page.toLowerCase() === "home" ? "/" : `/${page.toLowerCase()}`
                 }
                 className="font-['Noto_Sans_Variable'] text-winter hover:text-gray-300 transition-colors"
               >
