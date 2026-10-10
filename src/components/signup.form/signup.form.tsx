@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 
 import {
   Form,
@@ -14,30 +14,30 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
-import { useState } from 'react';
-import { signupFormSchema } from './signup.form.schema';
-import { sendSignupEmail, sendSignupReply } from './send.signup';
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { signupFormSchema } from "./signup.form.schema";
+import { sendSignupEmail, sendSignupReply } from "./send.signup";
 
 export const SignupForm = () => {
   const [sent, setSent] = useState(false);
 
   const competitions = [
     {
-      id: 'evening',
-      label: 'Evening',
+      id: "evening",
+      label: "Evening",
     },
     {
-      id: 'afternoon',
-      label: 'Afternoon',
+      id: "afternoon",
+      label: "Afternoon",
     },
   ] as const;
 
@@ -45,20 +45,24 @@ export const SignupForm = () => {
     resolver: zodResolver(signupFormSchema),
     defaultValues: {
       profile: {
-        firstName: '',
-        lastName: '',
-        phone: '',
-        email: '',
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
       },
       location: {
-        streetNumber: '',
-        streetName: '',
-        city: '',
-        postCode: '',
+        streetNumber: "",
+        streetName: "",
+        city: "",
+        postCode: "",
+      },
+      emergency: {
+        name: "",
+        phone: "",
       },
       membership: {
-        type: 'full',
-        payment: 'cash',
+        type: "full",
+        payment: "cash",
         competitions: [],
       },
     },
@@ -104,7 +108,7 @@ export const SignupForm = () => {
             className="font-semibold underline"
           >
             click this link
-          </a>{' '}
+          </a>{" "}
           <span> to download a paper copy of this form.</span>
         </p>
         <Form {...form}>
@@ -221,6 +225,44 @@ export const SignupForm = () => {
                     <FormLabel>Post Code</FormLabel>
                     <FormControl>
                       <Input placeholder="Post code..." {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+              Emergency Contact
+            </h3>
+            <div className="columns-2">
+              <FormField
+                control={form.control}
+                name="emergency.name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Emergency contact name..."
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="emergency.phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone Number</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Emergency contact number..."
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
