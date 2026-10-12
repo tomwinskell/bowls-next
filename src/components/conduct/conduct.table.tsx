@@ -1,9 +1,7 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -42,28 +40,29 @@ const statements = [
 
 export const ConductTable = () => {
   return (
-    <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Do</TableHead>
-          <TableHead>Don&apos;t</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {statements.map((statement, index) => (
-          <TableRow key={`${statement.do}-${index}`}>
-            <TableCell>{statement.do}</TableCell>
-            <TableCell>{statement.dont}</TableCell>
+    // Outer div wrapper prevents layout breaking on small mobile viewports
+    <div className="w-full overflow-x-auto rounded-md border bg-background">
+      <Table className="w-full table-fixed">
+        <TableHeader>
+          <TableRow>
+            {/* Split the page width exactly 50/50 for each column */}
+            <TableHead className="w-1/2">Do</TableHead>
+            <TableHead className="w-1/2">Don&apos;t</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {statements.map((statement, index) => (
+            <TableRow key={`${statement.do}-${index}`}>
+              <TableCell className="align-top whitespace-normal break-words py-3">
+                {statement.do}
+              </TableCell>
+              <TableCell className="align-top whitespace-normal break-words py-3">
+                {statement.dont}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
